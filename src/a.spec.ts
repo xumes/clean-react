@@ -1,5 +1,5 @@
 class Test {
-    a (): void {
-        console.log(1);
-    }
+  a (): void {
+    console.log(1)
+  }
 }
