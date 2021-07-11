@@ -1,5 +1,5 @@
 import { RemoteAuthentication } from './remote-authentication'
-import { HttpPostClientSpy } from '@/data/test/mock-http-client'
+import { HttpPostClientSpy, makeErrorResponse } from '@/data/test/mock-http-client'
 import { HttpStatusCode } from '@/data/protocols/http/http-response'
 import { mockAccountModel, mockAuthentication } from '@/domain/test/mock-account'
 import { InvalidCredentialError } from '@/domain/errors/invalid-credentials-error'
@@ -39,10 +39,7 @@ describe('RemoteAuthentication', () => {
 
   test('should throw InvalidCredentials error if HttpPostClient returns 401', async () => {
     const { sut, httpPostClientSpy } = makeSut()
-    const errorResponse = {
-      error: 'invalid_credentials',
-      message: 'The user credentials were incorrect.'
-    }
+    const errorResponse = makeErrorResponse()
     httpPostClientSpy.response = {
       statusCode: HttpStatusCode.unauthorized,
       body: errorResponse
@@ -53,10 +50,7 @@ describe('RemoteAuthentication', () => {
 
   test('should throw UnexpectedError if HttpPostClient returns 400', async () => {
     const { sut, httpPostClientSpy } = makeSut()
-    const errorResponse = {
-      error: faker.lorem.slug(15),
-      message: faker.lorem.sentence(20)
-    }
+    const errorResponse = makeErrorResponse()
     httpPostClientSpy.response = {
       statusCode: HttpStatusCode.badRequest,
       body: errorResponse
@@ -67,10 +61,7 @@ describe('RemoteAuthentication', () => {
 
   test('should throw UnexpectedError if HttpPostClient returns 500', async () => {
     const { sut, httpPostClientSpy } = makeSut()
-    const errorResponse = {
-      error: faker.lorem.slug(15),
-      message: faker.lorem.sentence(20)
-    }
+    const errorResponse = makeErrorResponse()
     httpPostClientSpy.response = {
       statusCode: HttpStatusCode.serverError,
       body: errorResponse

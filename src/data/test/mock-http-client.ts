@@ -1,6 +1,6 @@
 import { HttpPostClient, HttpPostParams } from '@/data/protocols/http/http-post-client'
-import { HttpResponse, HttpStatusCode } from '@/data/protocols/http/http-response'
-
+import { HttpErrorResponse, HttpResponse, HttpStatusCode } from '@/data/protocols/http/http-response'
+import faker from 'faker'
 export class HttpPostClientSpy<T, R> implements HttpPostClient<T, R> {
   url?: string
   body?: T
@@ -14,3 +14,8 @@ export class HttpPostClientSpy<T, R> implements HttpPostClient<T, R> {
     return Promise.resolve(this.response)
   }
 }
+
+export const makeErrorResponse = (): HttpErrorResponse => ({
+  error: faker.datatype.string(10),
+  message: faker.datatype.string(25)
+})
