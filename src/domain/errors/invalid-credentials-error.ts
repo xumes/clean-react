@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@/data/protocols/http/http-response-error'
+import { HttpErrorResponse } from '@/data/protocols/http/http-response'
 
 export class InvalidCredentialError extends Error {
   constructor (httpErrorResponse: HttpErrorResponse) {
