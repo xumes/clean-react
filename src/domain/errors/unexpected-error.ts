@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@/data/protocols/http/http-response'
+import { HttpErrorResponse } from '@/data/protocols/http'
 
 export class UnexpectedError extends Error {
   constructor (httpErrorResponse: HttpErrorResponse) {
