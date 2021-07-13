@@ -2,7 +2,7 @@ import { RemoteAuthentication } from './remote-authentication'
 import { HttpPostClientSpy, makeErrorResponse } from '@/data/test'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { mockAccountModel, mockAuthentication } from '@/domain/test'
-import { InvalidCredentialError, UnexpectedError } from '@/domain/errors'
+import { InvalidCredentialError, BadRequestError } from '@/domain/errors'
 import { AuthenticationParams } from '@/domain/usecases'
 import { AccountModel } from '@/domain/models'
 import faker from 'faker'
@@ -47,7 +47,7 @@ describe('RemoteAuthentication', () => {
     await expect(promise).rejects.toThrow(new InvalidCredentialError(errorResponse))
   })
 
-  test('should throw UnexpectedError if HttpPostClient returns 400', async () => {
+  test('should throw BadRequestError if HttpPostClient returns 400', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     const errorResponse = makeErrorResponse()
     httpPostClientSpy.response = {
@@ -55,10 +55,10 @@ describe('RemoteAuthentication', () => {
       body: errorResponse
     }
     const promise = sut.auth(mockAuthentication())
-    await expect(promise).rejects.toThrow(new UnexpectedError(errorResponse))
+    await expect(promise).rejects.toThrow(new BadRequestError(errorResponse))
   })
 
-  test('should throw UnexpectedError if HttpPostClient returns 500', async () => {
+  test('should throw BadRequestError if HttpPostClient returns 500', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     const errorResponse = makeErrorResponse()
     httpPostClientSpy.response = {
@@ -66,7 +66,7 @@ describe('RemoteAuthentication', () => {
       body: errorResponse
     }
     const promise = sut.auth(mockAuthentication())
-    await expect(promise).rejects.toThrow(new UnexpectedError(errorResponse))
+    await expect(promise).rejects.toThrow(new BadRequestError(errorResponse))
   })
 
   test('should return an AccountModel on success', async () => {
