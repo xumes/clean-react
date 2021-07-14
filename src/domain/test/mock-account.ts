@@ -3,6 +3,9 @@ import { AccountModel } from '../models'
 import faker from 'faker'
 
 export const mockAuthentication = (): AuthenticationParams => ({
+  clientId: faker.datatype.string(),
+  clientSecret: faker.datatype.string(),
+  grantType: faker.datatype.string(5),
   email: faker.internet.email(),
   password: faker.internet.password()
 })
