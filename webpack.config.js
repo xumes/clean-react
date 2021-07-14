@@ -1,6 +1,4 @@
 const path = require('path')
-const { DefinePlugin } = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { merge } = require('webpack-merge')
 const common = require('./webpack.common')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -18,6 +16,25 @@ module.exports = merge(common, {
     alias: {
       '@': path.join(__dirname, 'src')
     }
+  },
+  module: {
+    rules: [{
+      test: /\.ts(x?)$/,
+      loader: 'ts-loader',
+      exclude: /node_modules/
+    }, {
+      test: /\.scss$/,
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader',
+        options: {
+          modules: true
+        }
+      }, {
+        loader: 'sass-loader'
+      }]
+    }]
   },
   plugins: [
     new CleanWebpackPlugin()
