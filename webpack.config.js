@@ -1,9 +1,7 @@
 const path = require('path')
-const { merge } = require('webpack-merge')
-const common = require('./webpack.common')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-module.exports = merge(common, {
+module.exports = {
   mode: 'development',
   entry: './src/main/index.tsx',
   output: {
@@ -34,6 +32,16 @@ module.exports = merge(common, {
       }, {
         loader: 'sass-loader'
       }]
+    }, {
+      test: /\.svg$/,
+      use: [
+        {
+          loader: 'svg-url-loader',
+          options: {
+            limit: 10000
+          }
+        }
+      ]
     }]
   },
   plugins: [
@@ -49,4 +57,4 @@ module.exports = merge(common, {
     react: 'React',
     'react-dom': 'ReactDOM'
   }
-})
+}
