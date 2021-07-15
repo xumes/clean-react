@@ -1,13 +1,13 @@
+import Styles from './login-styles.scss'
+import Logo from '@/presentation/components/logo/logo'
 import Spinner from '@/presentation/components/spinner/spinner'
 import React from 'react'
-import Styles from './login-styles.scss'
 
 const Login: React.FC = () => {
   return (
     <div className={Styles.login}>
       <header className={Styles.header}>
-        <img src="https://app.proposify.com/files/cache/system/img/proposify-wordmark-with-cup.svg" />
-        <h1>Proposify</h1>
+        <Logo />
       </header>
       <form className={Styles.form}>
         <h2>Login</h2>
