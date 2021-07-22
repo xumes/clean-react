@@ -127,6 +127,10 @@ describe('Login Component', () => {
     fireEvent.input(passwordInput, { target: { value: password } })
 
     const submitButton = sut.getByTestId('submit') as HTMLButtonElement
-    expect(submitButton.disabled).toBe(false)
+    fireEvent.click(submitButton)
+
+    const spinner = sut.getByTestId('spinner')
+
+    expect(spinner).toBeTruthy()
   })
 })
