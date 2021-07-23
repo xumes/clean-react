@@ -9,13 +9,13 @@ const makeSut = (): MinLengthValidation => {
 describe('MinLengthValidation', () => {
   test('Should return error if value is invalid', () => {
     const sut = makeSut()
-    const error = sut.validate(faker.datatype.string(3))
+    const error = sut.validate(faker.datatype.string(4))
     expect(error).toEqual(new InvalidFieldError())
   })
 
   test('Should return falsy if value is valid', () => {
     const sut = makeSut()
-    const error = sut.validate(faker.datatype.string(6))
+    const error = sut.validate(faker.datatype.string(5))
     expect(error).toBeFalsy()
   })
 })
