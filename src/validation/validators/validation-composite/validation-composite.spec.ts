@@ -23,7 +23,7 @@ const makeSut = (fieldName: string): SutTypes => {
 
 describe('ValidationComposite', () => {
   test('Should return the first error if any validation fails', () => {
-      const fieldName = faker.database.column()
+    const fieldName = faker.database.column()
     const { sut, fieldValidationsSpy } = makeSut(fieldName)
     const errorMessage = faker.random.words()
     fieldValidationsSpy[0].error = new Error(errorMessage)
