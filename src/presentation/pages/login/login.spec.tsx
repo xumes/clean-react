@@ -152,11 +152,11 @@ describe('Login Component', () => {
     await simulateValidSubmit(sut, email, password)
 
     expect(authenticationSpy.params).toEqual({
-      email,
+      username: email,
       password,
-      clientId: 'something',
-      clientSecret: 'something',
-      grantType: 'password'
+      client_id: 'c1004f178078c83149f55681c8801469',
+      client_secret: '23a166987783cde870932d3040c0880fc72c979dd6b5266437b9aedb033fd2ae',
+      grant_type: 'password'
     })
   })
 

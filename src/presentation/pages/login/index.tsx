@@ -24,8 +24,8 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
     emailError: '',
     passwordError: '',
     mainError: '',
-    clientId: 'something',
-    clientSecret: 'something',
+    clientId: 'c1004f178078c83149f55681c8801469',
+    clientSecret: '23a166987783cde870932d3040c0880fc72c979dd6b5266437b9aedb033fd2ae',
     grantType: 'password'
   })
 
@@ -49,11 +49,11 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
       setState({ ...state, isLoading: true })
 
       const account = await authentication.auth({
-        email: state.email,
+        username: state.email,
         password: state.password,
-        clientId: state.clientId,
-        clientSecret: state.clientSecret,
-        grantType: state.grantType
+        client_id: state.clientId,
+        client_secret: state.clientSecret,
+        grant_type: state.grantType
       })
 
       localStorage.setItem('accessToken', account.accessToken)

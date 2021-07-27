@@ -25,7 +25,8 @@ describe('AxiosHttpAdapter', () => {
     const request = mockPostRequest()
     const { sut, mockedAxios } = makeSut()
     await sut.post(request)
-    expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body)
+    const headers = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+    expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body, headers)
   })
 
   test('should return the correct statusCode and body', () => {

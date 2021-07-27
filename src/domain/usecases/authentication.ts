@@ -1,11 +1,11 @@
 import { AccountModel } from '@/domain/models'
 
 export type AuthenticationParams = {
-  clientId: string
-  clientSecret: string
-  grantType: string
+  client_id: string
+  client_secret: string
+  grant_type: string
   code?: string
-  email: string
+  username: string
   password: string
 }
 
