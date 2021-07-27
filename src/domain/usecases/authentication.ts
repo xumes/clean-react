@@ -7,6 +7,8 @@ export type AuthenticationParams = {
   code?: string
   username: string
   password: string
+  scope?: string
+  response_type?: string
 }
 
 export interface Authentication {
