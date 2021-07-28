@@ -1,6 +1,6 @@
 import { AxiosHttpAdapter } from './axios-http-adapter'
 import { mockPostRequest } from '@/data/test'
-import { mockAxios } from '@/infra/test'
+import { mockAxios, mockedAxiosResult } from '@/infra/test'
 import axios from 'axios'
 
 jest.mock('axios')
@@ -36,5 +36,16 @@ describe('AxiosHttpAdapter', () => {
 
     const promise = sut.post(request)
     expect(promise).toEqual(mockedAxiosResult)
+  })
+
+  test('should return correct statusCode and body on failure', () => {
+    const request = mockPostRequest()
+    const { sut, mockedAxios } = makeSut()
+    mockedAxios.post.mockRejectedValueOnce({
+      response: mockedAxiosResult()
+    })
+
+    const promise = sut.post(request)
+    expect(promise).toEqual(mockedAxios.post.mock.results[0].value)
   })
 })
