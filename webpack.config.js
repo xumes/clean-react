@@ -1,5 +1,6 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { DefinePlugin } = require('webpack')
 
 module.exports = {
   mode: 'development',
@@ -45,7 +46,12 @@ module.exports = {
     }]
   },
   plugins: [
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new DefinePlugin({
+      'process.env.API_URL': JSON.stringify('http://dev-api.proposify.com/api'),
+      'process.env.CLIENT_ID': JSON.stringify('c1004f178078c83149f55681c8801469'),
+      'process.env.CLIENT_SECRET': JSON.stringify('23a166987783cde870932d3040c0880fc72c979dd6b5266437b9aedb033fd2ae')
+    })
   ],
   devServer: {
     contentBase: './public',

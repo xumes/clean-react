@@ -1,3 +1,3 @@
 export const makeApiUrl = (path: string): string => {
-  return `http://dev-api.proposify.com/api${path}`
+  return `${process.env.API_URL}${path}`
 }

@@ -154,8 +154,8 @@ describe('Login Component', () => {
     expect(authenticationSpy.params).toEqual({
       username: email,
       password,
-      client_id: 'c1004f178078c83149f55681c8801469',
-      client_secret: '23a166987783cde870932d3040c0880fc72c979dd6b5266437b9aedb033fd2ae',
+      client_id: 'process.env.CLIENT_ID',
+      client_secret: 'process.env.CLIENT_SECRET',
       grant_type: 'password'
     })
   })
