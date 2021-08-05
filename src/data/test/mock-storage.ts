@@ -1,4 +1,4 @@
-import { SetStorage } from "../protocols/cache"
+import { SetStorage } from '../protocols/cache'
 
 export class SetStorageSpy implements SetStorage {
   key: string
@@ -7,5 +7,7 @@ export class SetStorageSpy implements SetStorage {
   async set (key: string, value: any): Promise<void> {
     this.key = key
     this.value = value
+
+    return Promise.resolve()
   }
 }
