@@ -8,6 +8,7 @@ import FormStatus from '@/presentation/components/form-status/form-status'
 import Context from '@/presentation/contexts/form/form-context'
 import { Validation } from '@/presentation/protocols/validation'
 import { Authentication, SaveAccessToken } from '@/domain/usecases'
+import SubmitButton from '@/presentation/components/submit-button/submit-button'
 
 type Props = {
   validation: Validation
@@ -20,6 +21,7 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
 
   const [state, setState] = useState({
     isLoading: false,
+    isFormInvalid: true,
     email: '',
     password: '',
     emailError: '',
@@ -39,7 +41,8 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
     setState({
       ...state,
       emailError,
-      passwordError
+      passwordError,
+      isFormInvalid: !!emailError || !!passwordError
 
     })
   }, [state.email, state.password])
@@ -48,7 +51,7 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
     event.preventDefault()
 
     try {
-      if (state.isLoading || state.emailError || state.passwordError || state.mainError) {
+      if (state.isLoading || state.isFormInvalid || state.mainError) {
         return
       }
 
@@ -69,6 +72,7 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
       setState({
         ...state,
         isLoading: false,
+        isFormInvalid: !!state.emailError || !!state.passwordError,
         mainError: error.message
       })
     }
@@ -82,7 +86,7 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
           <h2>Login</h2>
           <Input type="email" name="email" placeholder="enter your e-mail" />
           <Input type="password" name="password" placeholder="enter your password" />
-          <button data-testid="submit" className={Styles.submit} type="submit" disabled={!!state.emailError || !!state.passwordError} >Login</button>
+          <SubmitButton text="Login" />
           <FormStatus />
         </form>
       </Context.Provider>
