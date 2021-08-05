@@ -25,8 +25,8 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
     emailError: '',
     passwordError: '',
     mainError: '',
-    clientId: 'process.env.CLIENT_ID',
-    clientSecret: 'process.env.CLIENT_SECRET',
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
     grantType: 'password'
   })
 
