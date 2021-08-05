@@ -68,8 +68,10 @@ const testErrorWrapChildCount = (sut: RenderResult, count: number): void => {
 
 describe('Login Component', () => {
   afterEach(cleanup)
-  beforeEach(localStorage.clear)
 
+  beforeEach(() => {
+    localStorage.clear()
+  })
   test('Should start with initial state', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
