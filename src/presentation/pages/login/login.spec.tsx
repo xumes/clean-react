@@ -212,4 +212,21 @@ describe('Login Component', () => {
     expect(history.length).toBe(1)
     expect(history.location.pathname).toBe('/')
   })
+
+  test('Should present an error message if SaveAccessToken fails', async () => {
+    const error = faker.datatype.string(10)
+    const errorMessage = faker.datatype.string(25)
+
+    const expectedMainError = new InvalidCredentialError({ error, message: errorMessage })
+
+    const { sut, saveAccessTokenMock } = makeSut()
+
+    jest.spyOn(saveAccessTokenMock, 'save').mockReturnValueOnce(Promise.reject(expectedMainError))
+    await simulateValidSubmit(sut)
+
+    const mainError = sut.getByTestId('main-error')
+    expect(mainError.textContent).toBe(errorMessage)
+
+    testErrorWrapChildCount(sut, 1)
+  })
 })
