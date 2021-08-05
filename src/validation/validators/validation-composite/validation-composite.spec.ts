@@ -1,4 +1,4 @@
-import { FieldValidationSpy } from '@/validation/test/field-validation'
+import { FieldValidationSpy } from '@/validation/test/mock-field-validation'
 import { ValidationComposite } from './validation-composite'
 import faker from 'faker'
 
@@ -32,7 +32,7 @@ describe('ValidationComposite', () => {
 
     const value = faker.random.word()
 
-    const error = sut.validate(fieldName, value)
+    const error = sut.validate(fieldName, { [fieldName]: value })
     expect(error).toBe(error)
   })
 
@@ -42,7 +42,7 @@ describe('ValidationComposite', () => {
 
     const value = faker.random.word()
 
-    const error = sut.validate(fieldName, value)
+    const error = sut.validate(fieldName, { [fieldName]: value })
     expect(error).toBeFalsy()
   })
 })
