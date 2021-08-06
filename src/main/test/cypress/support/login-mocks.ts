@@ -1,5 +1,5 @@
 import faker from 'faker'
-import * as Helper from '../support/http-mocks'
+import * as Helper from './http-mocks'
 
 export const mockInvalidCredentialsError = (errorMessage: string): void => Helper.mockInvalidCredentialsError('/api/authtoken', errorMessage)
 export const mockUnexpectedError = (errorMessage: string): void => Helper.mockUnexpectedError('/api/authtoken', 'POST', errorMessage)

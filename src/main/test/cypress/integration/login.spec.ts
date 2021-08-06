@@ -1,6 +1,6 @@
 import faker from 'faker'
 import * as FormHelper from '../support/form-helpers'
-import * as Http from './login-mocks'
+import * as Http from '../support/login-mocks'
 
 describe('Login', () => {
   beforeEach(() => {
