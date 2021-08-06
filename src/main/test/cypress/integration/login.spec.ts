@@ -51,7 +51,7 @@ describe('Login', () => {
     cy.getByTestId('error-wrap').should('not.have.descendants')
   })
 
-  it('Should display InvalidCredentialsError on 401', () => {
+  it('Should display error message on 401', () => {
     const errorMessage = faker.random.words()
     cy.intercept('POST', '/api/authtoken',
       {
@@ -75,11 +75,35 @@ describe('Login', () => {
     cy.url().should('eq', `${baseUrl}/login`)
   })
 
-  it('Should display InvalidCredentialsError on 401', () => {
+  it('Should display error message on 400', () => {
     const errorMessage = faker.random.words()
     cy.intercept('POST', '/api/authtoken',
       {
         statusCode: 400,
+        body: {
+          error: faker.random.word(),
+          message: errorMessage
+        }
+      }
+    )
+    cy.getByTestId('email').type(faker.internet.email())
+
+    cy.getByTestId('password').type(faker.random.alphaNumeric(8))
+
+    cy.getByTestId('submit').click()
+
+    cy.getByTestId('spinner').should('not.exist')
+    cy.getByTestId('main-error').should('exist')
+      .getByTestId('main-error').should('contains.text', errorMessage)
+
+    cy.url().should('eq', `${baseUrl}/login`)
+  })
+
+  it('Should display error message on 500', () => {
+    const errorMessage = faker.random.words()
+    cy.intercept('POST', '/api/authtoken',
+      {
+        statusCode: 500,
         body: {
           error: faker.random.word(),
           message: errorMessage
