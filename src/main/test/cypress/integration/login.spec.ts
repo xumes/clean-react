@@ -134,7 +134,7 @@ describe('Login', () => {
     )
     cy.getByTestId('email').type(faker.internet.email())
 
-    cy.getByTestId('password').type(faker.random.word())
+    cy.getByTestId('password').type(faker.random.alphaNumeric(8))
 
     cy.getByTestId('submit').click()
 
@@ -156,7 +156,7 @@ describe('Login', () => {
     )
     cy.getByTestId('email').type(faker.internet.email())
 
-    cy.getByTestId('password').type(faker.random.word())
+    cy.getByTestId('password').type(faker.random.alphaNumeric(8))
 
     cy.getByTestId('submit').click()
 
@@ -178,11 +178,25 @@ describe('Login', () => {
     ).as('request')
     cy.getByTestId('email').type(faker.internet.email())
 
-    cy.getByTestId('password').type(faker.random.word())
+    cy.getByTestId('password').type(faker.random.alphaNumeric(8))
 
-    cy.getByTestId('submit').click()
-    cy.getByTestId('submit').click()
     cy.getByTestId('submit').dblclick()
+
+    cy.get('@request.all').should('have.length', 1)
+  })
+
+  it('Should submit form on Enter', () => {
+    cy.intercept('POST', '/api/authtoken',
+      {
+        statusCode: 200,
+        body: {
+          accessToken: faker.datatype.uuid()
+        }
+      }
+    ).as('request')
+    cy.getByTestId('email').type(faker.internet.email())
+
+    cy.getByTestId('password').type(faker.random.alphaNumeric(8)).type('{enter}')
 
     cy.get('@request.all').should('have.length', 1)
   })
