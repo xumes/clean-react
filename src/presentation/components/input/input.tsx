@@ -16,37 +16,31 @@ const Input: React.FC<Props> = (props: Props) => {
     })
   }
 
-  const getStatus = (): string => {
-    return error ? '😡' : '😄'
-  }
-
-  const getTitle = (): string => {
-    return error || 'valid'
-  }
-
   const setFocus = (): void => {
     inputRef.current.focus()
   }
 
   return (
-    <div className={Styles.inputWrap}>
+    <div
+      data-testid={`${props.name}-wrap`}
+      className={Styles.inputWrap}
+      data-status={ error ? 'invalid' : 'valid' }
+    >
       <input
         {...props}
         ref={inputRef}
+        title={error}
         placeholder=" "
         data-testid={props.name}
         onChange={handleChange}
       />
-      <label onClick={setFocus}>
+      <label
+        data-testid={`${props.name}-label`}
+        onClick={setFocus}
+        title={error}
+      >
           {props.placeholder}
         </label>
-      <span
-        data-testid={`${props.name}-status`}
-        title={getTitle()}
-        className={Styles.status}
-        >
-          {getStatus()}
-        </span>
     </div>
   )
 }
