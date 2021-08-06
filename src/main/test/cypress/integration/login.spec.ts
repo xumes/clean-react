@@ -51,41 +51,95 @@ describe('Login', () => {
     cy.getByTestId('error-wrap').should('not.have.descendants')
   })
 
-  it('Should display error message if invalid credentials are provided', () => {
+  it('Should display InvalidCredentialsError on 401', () => {
+    const errorMessage = faker.random.words()
+    cy.intercept('POST', '/api/authtoken',
+      {
+        statusCode: 401,
+        body: {
+          error: faker.random.word(),
+          message: errorMessage
+        }
+      }
+    )
     cy.getByTestId('email').type(faker.internet.email())
 
     cy.getByTestId('password').type(faker.random.alphaNumeric(8))
 
     cy.getByTestId('submit').click()
 
-    cy.getByTestId('error-wrap')
-      .getByTestId('spinner').should('exist')
-      .getByTestId('main-error').should('not.exist')
+    cy.getByTestId('spinner').should('not.exist')
+    cy.getByTestId('main-error').should('exist')
+      .getByTestId('main-error').should('contains.text', errorMessage)
 
-    cy.getByTestId('error-wrap')
-      .getByTestId('spinner').should('not.exist')
-      .getByTestId('main-error').should('exist')
-    //   .getByTestId('main-error').should('contains.text', 'Invalid credentials')
+    cy.url().should('eq', `${baseUrl}/login`)
+  })
+
+  it('Should display InvalidCredentialsError on 401', () => {
+    const errorMessage = faker.random.words()
+    cy.intercept('POST', '/api/authtoken',
+      {
+        statusCode: 400,
+        body: {
+          error: faker.random.word(),
+          message: errorMessage
+        }
+      }
+    )
+    cy.getByTestId('email').type(faker.internet.email())
+
+    cy.getByTestId('password').type(faker.random.alphaNumeric(8))
+
+    cy.getByTestId('submit').click()
+
+    cy.getByTestId('spinner').should('not.exist')
+    cy.getByTestId('main-error').should('exist')
+      .getByTestId('main-error').should('contains.text', errorMessage)
 
     cy.url().should('eq', `${baseUrl}/login`)
   })
 
   it('Should save accessToken if valid credentials are provided', () => {
+    cy.intercept('POST', '/api/authtoken',
+      {
+        statusCode: 200,
+        body: {
+          accessToken: faker.datatype.uuid()
+        }
+      }
+    )
     cy.getByTestId('email').type('reginaldo.santos@proposify.com')
 
     cy.getByTestId('password').type('password')
 
     cy.getByTestId('submit').click()
 
-    cy.getByTestId('error-wrap')
-      .getByTestId('spinner').should('exist')
-      .getByTestId('main-error').should('not.exist')
-
-    cy.getByTestId('error-wrap')
-      .getByTestId('spinner').should('not.exist')
+    cy.getByTestId('spinner').should('not.exist')
 
     cy.url().should('eq', `${baseUrl}/`)
 
     cy.window().then(window => assert.isOk(window.localStorage.getItem('accessToken')))
+  })
+
+  it('Should display UnexpectedError if invalid data is returned', () => {
+    cy.intercept('POST', '/api/authtoken',
+      {
+        statusCode: 200,
+        body: {
+          invalidProp: faker.datatype.uuid()
+        }
+      }
+    )
+    cy.getByTestId('email').type('reginaldo.santos@proposify.com')
+
+    cy.getByTestId('password').type('password')
+
+    cy.getByTestId('submit').click()
+
+    cy.getByTestId('spinner').should('not.exist')
+
+    cy.getByTestId('main-error').should('contain.text', 'Something wrong happened. Please, try again later.')
+
+    cy.url().should('eq', `${baseUrl}/login`)
   })
 })

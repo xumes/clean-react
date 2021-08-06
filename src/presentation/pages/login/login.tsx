@@ -72,7 +72,6 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
       setState({
         ...state,
         isLoading: false,
-        isFormInvalid: !!state.emailError || !!state.passwordError,
         mainError: error.message
       })
     }
