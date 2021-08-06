@@ -132,9 +132,9 @@ describe('Login', () => {
         }
       }
     )
-    cy.getByTestId('email').type('reginaldo.santos@proposify.com')
+    cy.getByTestId('email').type(faker.internet.email())
 
-    cy.getByTestId('password').type('password')
+    cy.getByTestId('password').type(faker.random.word())
 
     cy.getByTestId('submit').click()
 
@@ -154,9 +154,9 @@ describe('Login', () => {
         }
       }
     )
-    cy.getByTestId('email').type('reginaldo.santos@proposify.com')
+    cy.getByTestId('email').type(faker.internet.email())
 
-    cy.getByTestId('password').type('password')
+    cy.getByTestId('password').type(faker.random.word())
 
     cy.getByTestId('submit').click()
 
