@@ -32,4 +32,20 @@ describe('Login', () => {
 
     cy.getByTestId('error-wrap').should('not.have.descendants')
   })
+
+  it('Should display valid state if form is valid', () => {
+    cy.getByTestId('email').type(faker.internet.email())
+    cy.getByTestId('email-status')
+      .should('have.attr', 'title', 'valid')
+      .should('contains.text', '😄')
+
+    cy.getByTestId('password').type(faker.random.alphaNumeric(8))
+    cy.getByTestId('password-status')
+      .should('have.attr', 'title', 'valid')
+      .should('contains.text', '😄')
+
+    cy.getByTestId('submit').should('not.have.attr', 'disabled')
+
+    cy.getByTestId('error-wrap').should('not.have.descendants')
+  })
 })
