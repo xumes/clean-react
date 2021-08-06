@@ -69,4 +69,23 @@ describe('Login', () => {
 
     cy.url().should('eq', `${baseUrl}/login`)
   })
+
+  it('Should save accessToken if valid credentials are provided', () => {
+    cy.getByTestId('email').type('reginaldo.santos@proposify.com')
+
+    cy.getByTestId('password').type('password')
+
+    cy.getByTestId('submit').click()
+
+    cy.getByTestId('error-wrap')
+      .getByTestId('spinner').should('exist')
+      .getByTestId('main-error').should('not.exist')
+
+    cy.getByTestId('error-wrap')
+      .getByTestId('spinner').should('not.exist')
+
+    cy.url().should('eq', `${baseUrl}/`)
+
+    cy.window().then(window => assert.isOk(window.localStorage.getItem('accessToken')))
+  })
 })
