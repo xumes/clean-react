@@ -48,7 +48,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new DefinePlugin({
-      'process.env.API_URL': JSON.stringify('http://dev-api.proposify.com/api'),
+      'process.env.API_URL': JSON.stringify('https://dev-api.proposify.com/api'),
       'process.env.CLIENT_ID': JSON.stringify('c1004f178078c83149f55681c8801469'),
       'process.env.CLIENT_SECRET': JSON.stringify('23a166987783cde870932d3040c0880fc72c979dd6b5266437b9aedb033fd2ae')
     })
@@ -57,7 +57,12 @@ module.exports = {
     contentBase: './public',
     writeToDisk: true,
     historyApiFallback: true,
-    port: 8080
+    port: 8080,
+    allowedHosts: [
+      'reginaldodev.proposify.com',
+      'proposify.com',
+      '*.proposify.com'
+    ]
   },
   externals: {
     react: 'React',

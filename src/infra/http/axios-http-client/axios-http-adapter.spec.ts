@@ -2,7 +2,6 @@ import { AxiosHttpAdapter } from './axios-http-adapter'
 import { mockPostRequest } from '@/data/test'
 import { mockAxios, mockedAxiosResult } from '@/infra/test'
 import axios from 'axios'
-
 jest.mock('axios')
 
 type SutTypes = {

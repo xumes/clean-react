@@ -62,7 +62,7 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
         password: state.password,
         client_id: state.clientId,
         client_secret: state.clientSecret,
-        grant_type: state.grantType
+        grant_type: 'password'
       })
 
       await saveAccessToken.save(account.accessToken)

@@ -2,12 +2,12 @@ import { AuthenticationParams } from '@/domain/usecases'
 import { AccountModel } from '../models'
 import faker from 'faker'
 
-export const mockAuthentication = (): AuthenticationParams => ({
-  client_id: faker.datatype.string(),
-  client_secret: faker.datatype.string(),
-  grant_type: faker.datatype.string(5),
-  username: faker.internet.email(),
-  password: faker.internet.password()
+export const mockAuthentication = (body: any): AuthenticationParams => ({
+  client_id: body.client_id,
+  client_secret: body.client_secret,
+  grant_type: body.grant_type,
+  username: body.username,
+  password: body.password
 })
 
 export const mockAccountModel = (): AccountModel => ({
