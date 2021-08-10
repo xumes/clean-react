@@ -1,21 +1,10 @@
-const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { DefinePlugin } = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const common = require('./webpack.common')
+const { merge } = require('webpack-merge')
 
-module.exports = {
+module.exports = merge(common, {
   mode: 'development',
-  entry: './src/main/index.tsx',
-  output: {
-    path: path.join(__dirname, 'public/js'),
-    filename: 'bundle.js',
-    publicPath: '/public/js'
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', 'scss'],
-    alias: {
-      '@': path.join(__dirname, 'src')
-    }
-  },
   module: {
     rules: [{
       test: /\.ts(x?)$/,
@@ -46,11 +35,13 @@ module.exports = {
     }]
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new DefinePlugin({
       'process.env.API_URL': JSON.stringify('https://dev-api.proposify.com/api'),
       'process.env.CLIENT_ID': JSON.stringify('c1004f178078c83149f55681c8801469'),
       'process.env.CLIENT_SECRET': JSON.stringify('23a166987783cde870932d3040c0880fc72c979dd6b5266437b9aedb033fd2ae')
+    }),
+    new HtmlWebpackPlugin({
+      template: './template.dev.html'
     })
   ],
   devServer: {
@@ -64,9 +55,5 @@ module.exports = {
       'proposify.com',
       '*.proposify.com'
     ]
-  },
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM'
   }
-}
+})
