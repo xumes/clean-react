@@ -60,6 +60,7 @@ module.exports = {
     port: 8080,
     allowedHosts: [
       'reginaldodev.proposify.com',
+      'dev-api.proposify.com',
       'proposify.com',
       '*.proposify.com'
     ]
