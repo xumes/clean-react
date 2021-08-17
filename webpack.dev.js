@@ -44,6 +44,7 @@ module.exports = merge(common, {
       template: './template.dev.html'
     })
   ],
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: './public',
     writeToDisk: true,
