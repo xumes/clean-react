@@ -47,9 +47,5 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: 'main-bundle-[hash].css'
     })
-  ],
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM'
-  }
+  ]
 })
