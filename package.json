@@ -64,6 +64,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "express": "^4.17.1",
     "express-history-api-fallback": "^2.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -71,5 +72,5 @@
   },
   "engines": {
     "node": "12.18.2"
-    }
+  }
 }
