@@ -110,6 +110,8 @@ describe('Login', () => {
 
     cy.getByTestId('submit').dblclick()
 
+    cy.wait('@request')
+
     FormHelper.testHttpCallsCount(1)
   })
 
@@ -120,6 +122,8 @@ describe('Login', () => {
 
     cy.getByTestId('password').type(faker.random.alphaNumeric(8)).type('{enter}')
 
+    cy.wait('@request')
+
     FormHelper.testHttpCallsCount(1)
   })
 
@@ -127,6 +131,8 @@ describe('Login', () => {
     Http.mockOk()
 
     cy.getByTestId('email').type(faker.internet.email()).type('{enter}')
+
+    cy.wait('@request')
 
     FormHelper.testHttpCallsCount(0)
   })
