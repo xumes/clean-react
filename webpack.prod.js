@@ -1,6 +1,7 @@
 const { DefinePlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const FaviconWebpackPlugin = require('favicons-webpack-plugin')
 const common = require('./webpack.common')
 const { merge } = require('webpack-merge')
 
@@ -37,7 +38,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new DefinePlugin({
-      'process.env.API_URL': JSON.stringify('https://dev-api.proposify.com/api'),
+      'process.env.API_URL': JSON.stringify('https://api.proposify.org/api/authtoken'),
       'process.env.CLIENT_ID': JSON.stringify('c1004f178078c83149f55681c8801469'),
       'process.env.CLIENT_SECRET': JSON.stringify('23a166987783cde870932d3040c0880fc72c979dd6b5266437b9aedb033fd2ae')
     }),
@@ -46,7 +47,8 @@ module.exports = merge(common, {
     }),
     new MiniCssExtractPlugin({
       filename: 'main-bundle-[chunkhash].css'
-    })
+    }),
+    new FaviconWebpackPlugin('./public/favicon.png')
   ],
   externals: {
     react: 'React',
