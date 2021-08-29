@@ -46,15 +46,13 @@ module.exports = merge(common, {
   ],
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './public',
-    writeToDisk: true,
     historyApiFallback: true,
     port: 8080,
     allowedHosts: [
       'reginaldodev.proposify.com',
       'dev-api.proposify.com',
       'proposify.com',
-      '*.proposify.com'
+      '.proposify.com'
     ]
   }
 })

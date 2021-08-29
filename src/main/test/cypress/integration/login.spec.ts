@@ -132,8 +132,6 @@ describe('Login', () => {
 
     cy.getByTestId('email').type(faker.internet.email()).type('{enter}')
 
-    cy.wait('@request')
-
     FormHelper.testHttpCallsCount(0)
   })
 })

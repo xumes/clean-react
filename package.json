@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "webpack serve --config webpack.dev.js --progress",
+    "dev": "webpack serve --config webpack.dev.js --no-client-progress",
     "build": "webpack --config webpack.prod.js",
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "npm test -- --watch",
