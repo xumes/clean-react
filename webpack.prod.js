@@ -38,9 +38,9 @@ module.exports = merge(common, {
   },
   plugins: [
     new DefinePlugin({
-      'process.env.API_URL': JSON.stringify('https://api.proposify.org/api/authtoken'),
-      'process.env.CLIENT_ID': JSON.stringify('c1004f178078c83149f55681c8801469'),
-      'process.env.CLIENT_SECRET': JSON.stringify('23a166987783cde870932d3040c0880fc72c979dd6b5266437b9aedb033fd2ae')
+      'process.env.API_URL': JSON.stringify('https://api.proposify.org/api'),
+      'process.env.CLIENT_ID': JSON.stringify('e113ac712b4c0f72692463c92ad23f9b7c4b35cec224d214'),
+      'process.env.CLIENT_SECRET': JSON.stringify('72d4517c9700d8bc1f3b555258963865f3482c5ae0f87d6bb748832d9e6de8cf')
     }),
     new HtmlWebpackPlugin({
       template: './template.prod.html'
