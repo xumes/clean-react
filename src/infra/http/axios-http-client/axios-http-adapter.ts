@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 
 export class AxiosHttpAdapter implements HttpPostClient<any> {
   async post (params: HttpPostParams): Promise<HttpResponse<any>> {
-    let httpResponse: AxiosResponse<any>
+    let axiosResponse: AxiosResponse<any>
 
     const request = {
       headers: {
@@ -12,10 +12,10 @@ export class AxiosHttpAdapter implements HttpPostClient<any> {
     }
 
     try {
-      httpResponse = await axios.post(params.url, params.body, request)
+      axiosResponse = await axios.post(params.url, params.body, request)
     } catch (error) {
       if (error.response) {
-        httpResponse = error.response
+        axiosResponse = error.response
       } else {
         return {
           statusCode: 500,
@@ -24,8 +24,8 @@ export class AxiosHttpAdapter implements HttpPostClient<any> {
       }
     }
     return {
-      statusCode: httpResponse.status,
-      body: httpResponse.data
+      statusCode: axiosResponse.status,
+      body: axiosResponse.data
     }
   }
 }
