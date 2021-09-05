@@ -16,11 +16,11 @@ const requestBody = {
 
 type SutTypes = {
   sut: RemoteAuthentication
-  httpPostClientSpy: HttpPostClientSpy<URLSearchParams, AccountModel>
+  httpPostClientSpy: HttpPostClientSpy<AccountModel>
 }
 
 const makeSut = (url: string = faker.internet.url()): SutTypes => {
-  const httpPostClientSpy = new HttpPostClientSpy<URLSearchParams, AccountModel>()
+  const httpPostClientSpy = new HttpPostClientSpy<AccountModel>()
 
   const sut = new RemoteAuthentication(url, httpPostClientSpy)
   return {
