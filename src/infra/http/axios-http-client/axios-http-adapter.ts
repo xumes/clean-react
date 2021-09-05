@@ -28,4 +28,8 @@ export class AxiosHttpAdapter implements HttpPostClient<any> {
       body: axiosResponse.data
     }
   }
+
+  async get (params: HttpPostParams): Promise<void> {
+    await axios.get(params.url)
+  }
 }
