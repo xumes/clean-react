@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpPostClient, HttpPostParams, HttpResponse, HttpStatusCode } from '@/data/protocols/http'
+import { HttpErrorResponse, HttpGetClient, HttpGetParams, HttpPostClient, HttpPostParams, HttpResponse, HttpStatusCode } from '@/data/protocols/http'
 import faker from 'faker'
 
 const requestBody = {
@@ -32,3 +32,11 @@ export const makeErrorResponse = (): HttpErrorResponse => ({
   error: faker.datatype.string(10),
   message: faker.datatype.string(25)
 })
+
+export class HttpGetClientSpy implements HttpGetClient {
+  url: string
+
+  async get (params: HttpGetParams): Promise<void> {
+    this.url = params.url
+  }
+}
