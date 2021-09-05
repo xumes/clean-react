@@ -4,6 +4,7 @@ import { HttpStatusCode } from '@/data/protocols/http'
 import { UnexpectedError } from '@/domain/errors'
 import faker from 'faker/locale/en_CA'
 import { ActivityModel } from '@/domain/models'
+import { mockActivityListModel } from '@/domain/test/mock-activity-list'
 
 type SutTypes = {
   sut: RemoteLoadActivityList
@@ -57,5 +58,18 @@ describe('RemoteLoadActivityList', () => {
 
     const promise = sut.loadAll()
     await expect(promise).rejects.toThrow(new UnexpectedError())
+  })
+
+  test('should return a list of ActivityModel if HttpGetClient returns 200', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    const httpResult = mockActivityListModel()
+
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.ok,
+      body: httpResult
+    }
+
+    const activityList = await sut.loadAll()
+    expect(activityList).toEqual(httpResult)
   })
 })
