@@ -72,4 +72,15 @@ describe('RemoteLoadActivityList', () => {
     const activityList = await sut.loadAll()
     expect(activityList).toEqual(httpResult)
   })
+
+  test('should return a empty if HttpGetClient returns 204', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.noContent
+    }
+
+    const activityList = await sut.loadAll()
+    expect(activityList).toEqual([])
+  })
 })
