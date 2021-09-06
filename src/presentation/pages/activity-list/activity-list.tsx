@@ -21,7 +21,9 @@ const ActivityList: React.FC = () => {
                 <ul>
                     <li>
                         <div className={Styles.activityContent}>
-                            <span className={Styles.icon}></span>
+                            <div className={Styles.iconWrap}>
+                                <img className={Styles.icon} width="40px" src="https://e7.pngegg.com/pngimages/975/667/png-clipart-gray-eye-on-black-background-logo-circle-brand-angle-eye-icon-viewed-accomms-people-black.png"/>
+                            </div>
                             <p className={Styles.activityDescription}>Xumes reviewed the proposal Test proposal</p>
                         </div>
                         <footer>
