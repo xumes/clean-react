@@ -1,0 +1,21 @@
+@import "../../styles//colours.scss";
+
+.iconWrap {
+    display: flex;
+    flex-direction: column;
+    background-color: $primaryLight;
+    color: $white;
+    border-radius: 8px;
+    margin-left: 16px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 100px;
+    flex-shrink: 0;
+
+    .icon {
+        border-radius: 90%;
+        width: 60px;
+    }
+}

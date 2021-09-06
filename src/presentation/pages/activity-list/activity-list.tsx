@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '@/presentation/components/header/header'
 import Footer from '@/presentation/components/footer/footer'
+import Icon, { IconName } from '@/presentation/components/icon/icon'
 import Styles from './activity-list-styles.scss'
 
 const ActivityList: React.FC = () => {
@@ -12,9 +13,7 @@ const ActivityList: React.FC = () => {
                 <ul>
                     <li>
                         <div className={Styles.activityContent}>
-                            <div className={Styles.iconWrap}>
-                                <img className={Styles.icon} width="40px" src="https://e7.pngegg.com/pngimages/975/667/png-clipart-gray-eye-on-black-background-logo-circle-brand-angle-eye-icon-viewed-accomms-people-black.png"/>
-                            </div>
+                            <Icon iconName={IconName.noIcon} />
                             <p className={Styles.activityDescription}>Xumes reviewed the proposal Test proposal</p>
                         </div>
                         <footer>
