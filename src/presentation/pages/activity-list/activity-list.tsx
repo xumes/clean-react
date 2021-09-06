@@ -1,21 +1,12 @@
-import Logo from '@/presentation/components/logo/logo'
-import Footer from '@/presentation/components/footer/footer'
-
 import React from 'react'
+import Header from '@/presentation/components/header/header'
+import Footer from '@/presentation/components/footer/footer'
 import Styles from './activity-list-styles.scss'
 
 const ActivityList: React.FC = () => {
   return (
         <div className={Styles.activityListWrap}>
-            <header className={Styles.headerWrap}>
-                <div className={Styles.headerContent}>
-                    <Logo />
-                    <div className={Styles.logoutWrap}>
-                        <span>Reginaldo Santos</span>
-                        <a href="#">Logout</a>
-                    </div>
-                </div>
-            </header>
+            <Header />
             <div className={Styles.contentWrap}>
                 <h2>Recent Activity</h2>
                 <ul>
