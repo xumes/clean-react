@@ -3,7 +3,7 @@
 .headerWrap{
     display: flex;
     background-color: $primaryDark;
-    border-top: 40px solid $primary;
+    border-top: 24px solid $primary;
     justify-content: center;
 
     .headerContent {
@@ -12,7 +12,7 @@
         justify-content: space-between;
         max-width: 800px;
         flex-grow: 1;
-        padding: 24px 40px;
+        padding: 16px 40px;
 
         img {
             max-height: 60px;
@@ -41,5 +41,11 @@
                 }
             }
         }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .headerWrap {
+        border-top-width: 16px;
     }
 }

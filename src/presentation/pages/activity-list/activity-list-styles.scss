@@ -14,14 +14,13 @@
         width: 100%;
         max-width: 800px;
         flex-grow: 1;
-        padding: 24px;
+        padding: 16px;
 
         h2 {
             color: $primaryDark;
             font-size: 20px;
             font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
 
         ul {
@@ -38,7 +37,7 @@
                 background-color: $white;
                 justify-content: space-between;
                 border-radius: 8px;
-                margin-bottom: 24px;
+                margin-bottom: 8px;
                 box-shadow: 0px 1px 3px -1px $black;
 
                 .activityContent {
@@ -51,8 +50,8 @@
                      background-image: 
                         linear-gradient(to right, rgba($primaryDark, 0.4), rgba($primaryDark, 0.1)),
                         linear-gradient(to right, $white, $white);
-                    background-position: 0 0, 40 0;
-                    background-size: 40px 100%, 100% 100%;
+                    background-position: 0 0, 50 0;
+                    background-size: 50px 100%, 100% 100%;
 
                     .activityDescription {
                         flex-grow: 1;
