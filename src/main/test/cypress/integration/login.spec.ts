@@ -85,7 +85,7 @@ describe('Login', () => {
 
     FormHelper.testUrl('/')
 
-    FormHelper.testLocalStorage('accessToken')
+    FormHelper.testLocalStorage('account')
   })
 
   it('Should display UnexpectedError if invalid data is returned', () => {
