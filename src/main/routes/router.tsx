@@ -1,13 +1,10 @@
 import React from 'react'
 import '@/presentation/styles/global.scss'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { makeLogin } from '@/main/factories/pages/login/login-factory'
 import ActivityList from '@/presentation/pages/activity-list/activity-list'
 
-type Props = {
-  makeLogin: React.FC
-}
-
-const Router: React.FC<Props> = ({ makeLogin }: Props) => {
+const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
