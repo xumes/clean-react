@@ -30,7 +30,7 @@ describe('LocalUpdateCurrentAccount', () => {
 
   test('Should throw if SetStorage throws', async () => {
     const { sut, setStorageMock } = makeSut()
-    jest.spyOn(setStorageMock, 'set').mockRejectedValueOnce(new Error())
+    jest.spyOn(setStorageMock, 'set').mockImplementationOnce(() => { throw new Error() })
     const account = mockAccountModel()
     const promise = sut.save(account)
 
