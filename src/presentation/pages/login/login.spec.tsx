@@ -68,14 +68,9 @@ const testStatusForField = (fieldName: string, validationError: string = ''): vo
   const field = screen.getByTestId(`${fieldName}`)
   const label = screen.getByTestId(`${fieldName}-label`)
 
-  expect(wrap.getAttribute('data-status')).toBe(validationError ? 'invalid' : 'valid')
-  expect(field.title).toBe(validationError)
-  expect(label.title).toBe(validationError)
-}
-
-const testErrorWrapChildCount = (count: number): void => {
-  const errorWrap = screen.getByTestId('error-wrap')
-  expect(errorWrap.childElementCount).toBe(count)
+  expect(wrap).toHaveAttribute('data-status', validationError ? 'invalid' : 'valid')
+  expect(field).toHaveProperty('title', validationError)
+  expect(label).toHaveProperty('title', validationError)
 }
 
 describe('Login Component', () => {
@@ -83,10 +78,9 @@ describe('Login Component', () => {
     const validationError = faker.random.words()
     makeSut({ validationError })
 
-    testErrorWrapChildCount(0)
+    expect(screen.getByTestId('error-wrap').children).toHaveLength(0)
 
-    const submitButton = screen.getByTestId('submit') as HTMLButtonElement
-    expect(submitButton.disabled).toBe(true)
+    expect(screen.getByTestId('submit')).toBeDisabled()
 
     testStatusForField('email', validationError)
 
@@ -135,8 +129,7 @@ describe('Login Component', () => {
     populateEmailField()
     populatePasswordField()
 
-    const submitButton = screen.getByTestId('submit') as HTMLButtonElement
-    expect(submitButton.disabled).toBe(false)
+    expect(screen.getByTestId('submit')).toBeEnabled()
   })
 
   test('Should show spinner on submit', async () => {
@@ -147,9 +140,7 @@ describe('Login Component', () => {
     const submitButton = screen.getByTestId('submit') as HTMLButtonElement
     fireEvent.click(submitButton)
 
-    const spinner = screen.getByTestId('spinner')
-
-    expect(spinner).toBeTruthy()
+    expect(screen.queryByTestId('spinner')).toBeInTheDocument()
   })
 
   test('Should call Authentication with correct values', async () => {
@@ -199,10 +190,9 @@ describe('Login Component', () => {
     jest.spyOn(authenticationSpy, 'auth').mockReturnValueOnce(Promise.reject(expectedMainError))
     await simulateValidSubmit()
 
-    const mainError = screen.getByTestId('main-error')
-    expect(mainError.textContent).toBe(errorMessage)
+    expect(screen.getByTestId('main-error')).toHaveTextContent(errorMessage)
 
-    testErrorWrapChildCount(1)
+    expect(screen.getByTestId('error-wrap').children).toHaveLength(1)
   })
 
   test('Should call UpdateCurrentAccount and redirect to the main page on success', async () => {
