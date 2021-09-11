@@ -8,7 +8,10 @@ import ActivityList from '@/presentation/pages/activity-list/activity-list'
 
 const Router: React.FC = () => {
   return (
-    <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountAdapter }}>
+    <ApiContext.Provider
+      value={{
+        setCurrentAccount: setCurrentAccountAdapter
+      }}>
       <BrowserRouter>
         <Switch>
           <Route path='/login' exact component={makeLogin} />
