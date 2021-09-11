@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import Styles from './activity-list-styles.scss'
 import Header from '@/presentation/components/header/header'
 import Footer from '@/presentation/components/footer/footer'
-import Styles from './activity-list-styles.scss'
-import { ActivityItemEmpty } from './components'
+import { ActivityItemEmpty } from '@/presentation/pages/activity-list/components'
+import { LoadActivityList } from '@/domain/usecases/load-activity-list'
 
-const ActivityList: React.FC = () => {
+type Props = {
+  loadActivityList: LoadActivityList
+}
+
+const ActivityList: React.FC<Props> = ({ loadActivityList }: Props) => {
+  useEffect(() => {
+    (async function () {
+      loadActivityList.loadAll()
+    })()
+  }, [])
+
   return (
         <div className={Styles.activityListWrap}>
             <Header />
