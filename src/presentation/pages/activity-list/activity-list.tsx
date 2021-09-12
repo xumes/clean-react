@@ -12,12 +12,14 @@ type Props = {
 
 const ActivityList: React.FC<Props> = ({ loadActivityList }: Props) => {
   const [state, setstate] = useState({
-    activities: [] as ActivityModel[]
+    activities: [] as ActivityModel[],
+    error: ''
   })
 
   useEffect(() => {
     loadActivityList.loadAll()
-      .then(activities => setstate({ activities }))
+      .then(activities => setstate({ ...state, activities }))
+      .catch(error => setstate({ ...state, error: error.message }))
   }, [])
 
   return (
@@ -25,12 +27,19 @@ const ActivityList: React.FC<Props> = ({ loadActivityList }: Props) => {
             <Header />
             <div className={Styles.contentWrap}>
                 <h2>Recent Activity</h2>
-                <ul data-testid="activity-list">
-                  {state.activities.length
-                    ? state.activities.map((activity: ActivityModel) => <ActivityItem key={activity.id} activity={activity} />)
-                    : <ActivityItemEmpty />
-                  }
-                </ul>
+                {state.error
+                  ? <div>
+                      <span data-testid="error">{state.error}</span>
+                      <button>Reload</button>
+                    </div>
+                  : <ul data-testid="activity-list">
+                    {state.activities.length
+                      ? state.activities.map((activity: ActivityModel) => <ActivityItem key={activity.id} activity={activity} />)
+                      : <ActivityItemEmpty />
+                    }
+                  </ul>
+                }
+
             </div>
             <Footer />
         </div>
