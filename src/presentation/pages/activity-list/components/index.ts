@@ -1,2 +1,5 @@
-export { default as ActivityItem } from './activity-item/activity-item'
-export { default as ActivityItemEmpty } from './activity-item-empty/activity-item-empty'
+export { default as ActivityItem } from './item/item'
+export { default as ActivityItemEmpty } from './item-empty/item-empty'
+export { default as ActivittListItem } from './list/list'
+export { default as ActivityError } from './error/error'
+export { default as ActivityContext } from './context/context'

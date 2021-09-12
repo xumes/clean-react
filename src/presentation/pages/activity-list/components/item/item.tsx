@@ -1,7 +1,7 @@
 import React from 'react'
 import Icon, { IconName } from '@/presentation/components/icon/icon'
 
-import Styles from './activity-item-styles.scss'
+import Styles from './item-styles.scss'
 import { ActivityModel } from '@/domain/models'
 
 type Props = {

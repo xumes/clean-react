@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Styles from './activity-item-empty-styles.scss'
+import Styles from './item-empty-styles.scss'
 
 const ActivityItemEmpty: React.FC = () => {
   return (
