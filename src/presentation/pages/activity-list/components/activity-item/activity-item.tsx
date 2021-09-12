@@ -21,12 +21,23 @@ const getIcon = (category: string): IconName => {
   }
 }
 
+const getDurationLabel = (activity: ActivityModel): string => {
+  if (activity.category !== 'proposal-viewed') {
+    return ''
+  }
+
+  return `for ${activity.duration} seconds`
+}
+
 const ActivityItem: React.FC<Props> = ({ activity }: Props) => {
   return (
     <li className={Styles.activityItemWrap}>
         <div className={Styles.activityContent}>
             <Icon iconName={getIcon(activity.category)} />
-            <p data-testid="description" className={Styles.activityDescription}>{activity.description}</p>
+            <p data-testid="description" className={Styles.activityDescription}>
+              {activity.description}
+              <span data-testid="duration" className={Styles.activityDuration}>{getDurationLabel(activity)}</span>
+            </p>
         </div>
         <footer>
             <time>
