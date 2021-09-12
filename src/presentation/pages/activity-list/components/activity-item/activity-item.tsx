@@ -8,11 +8,24 @@ type Props = {
   activity: ActivityModel
 }
 
+const getIcon = (category: string): IconName => {
+  switch (category) {
+    case 'proposal-created':
+      return IconName.proposalCreated
+    case 'proposal-signed':
+      return IconName.proposalSigned
+    case 'proposal-viewed':
+      return IconName.proposalViewed
+    default:
+      return IconName.noIcon
+  }
+}
+
 const ActivityItem: React.FC<Props> = ({ activity }: Props) => {
   return (
     <li className={Styles.activityItemWrap}>
         <div className={Styles.activityContent}>
-            <Icon iconName={IconName.proposalViewed} />
+            <Icon iconName={getIcon(activity.category)} />
             <p data-testid="description" className={Styles.activityDescription}>{activity.description}</p>
         </div>
         <footer>
