@@ -2,20 +2,25 @@ import React from 'react'
 import Icon, { IconName } from '@/presentation/components/icon/icon'
 
 import Styles from './activity-item-styles.scss'
+import { ActivityModel } from '@/domain/models'
 
-const ActivityItem: React.FC = () => {
+type Props = {
+  activity: ActivityModel
+}
+
+const ActivityItem: React.FC<Props> = ({ activity }: Props) => {
   return (
     <li className={Styles.activityItemWrap}>
         <div className={Styles.activityContent}>
-            <Icon iconName={IconName.proposalSigned} />
-            <p className={Styles.activityDescription}>Xumes signed the proposal Test proposal</p>
+            <Icon iconName={IconName.proposalViewed} />
+            <p data-testid="description" className={Styles.activityDescription}>{activity.description}</p>
         </div>
         <footer>
             <time>
-                <span className={Styles.timeAgo}>1 day ago</span>
-                <span className={Styles.dateTime}>September 2, 2021 @ 10:24:15 AM (ADT)</span>
+                <span data-testid="time-ago" className={Styles.timeAgo}>{activity.formattedDateTime}</span>
+                <span data-testid="date-time" className={Styles.dateTime}>{activity.createdDateTime.toUTCString()}</span>
             </time>
-            <p>Action</p>
+            <p data-testid="action-button">Action</p>
         </footer>
     </li>
   )
