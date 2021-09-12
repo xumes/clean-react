@@ -1,7 +1,7 @@
 import { ActivityModel } from '../models'
 import faker from 'faker'
 
-export const mockActivityListModel = (): ActivityModel[] => ([{
+export const mockActivityModel = (): ActivityModel => ({
   id: faker.datatype.number(),
   userId: faker.datatype.number(),
   createdDateTime: faker.datatype.datetime(),
@@ -20,4 +20,10 @@ export const mockActivityListModel = (): ActivityModel[] => ([{
   message: faker.random.words(5),
   duration: faker.datatype.number(),
   formattedDateTime: faker.datatype.string()
-}])
+})
+
+export const mockActivityListModel = (): ActivityModel[] => ([
+  mockActivityModel(),
+  mockActivityModel(),
+  mockActivityModel()
+])
