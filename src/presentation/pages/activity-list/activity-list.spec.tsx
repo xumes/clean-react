@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import ActivityList from '@/presentation/pages/activity-list/activity-list'
 import { LoadActivityList } from '@/domain/usecases/load-activity-list'
 import { ActivityModel } from '@/domain/models'
@@ -68,5 +68,20 @@ describe('ActivityLit Component', () => {
 
     expect(screen.queryByTestId('activity-list')).not.toBeInTheDocument()
     expect(screen.queryByTestId('error')).toHaveTextContent(error.message)
+  })
+
+  test('Should call LoadSurveyList on reload', async () => {
+    const loadActivityListSpy = new LoadActivityListSpy()
+    jest.spyOn(loadActivityListSpy, 'loadAll').mockRejectedValueOnce(new UnexpectedError())
+
+    makeSut(loadActivityListSpy)
+
+    await waitFor(() => screen.getByRole('heading'))
+
+    fireEvent.click(screen.getByTestId('reload'))
+
+    await waitFor(() => screen.getByRole('heading'))
+
+    expect(loadActivityListSpy.callsCount).toBe(1)
   })
 })
