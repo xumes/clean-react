@@ -12,9 +12,9 @@ export class AuthorizeHttpGetClientDecorator implements HttpGetClient {
 
     if (account?.accessToken) {
       Object.assign(params, {
-        headers: {
+        headers: Object.assign(params.headers || {}, {
           Authorization: `Bearer ${account.accessToken}`
-        }
+        })
       })
     }
 
