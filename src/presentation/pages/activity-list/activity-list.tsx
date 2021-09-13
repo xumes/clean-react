@@ -4,7 +4,6 @@ import Header from '@/presentation/components/header/header'
 import Footer from '@/presentation/components/footer/footer'
 import { ActivittListItem, ActivityContext, ActivityError } from '@/presentation/pages/activity-list/components'
 import { LoadActivityList } from '@/domain/usecases/load-activity-list'
-import { ActivityModel } from '@/domain/models'
 
 type Props = {
   loadActivityList: LoadActivityList
@@ -12,7 +11,7 @@ type Props = {
 
 const ActivityList: React.FC<Props> = ({ loadActivityList }: Props) => {
   const [state, setState] = useState({
-    activities: [] as ActivityModel[],
+    activities: [] as LoadActivityList.Model[],
     error: '',
     reload: false
   })

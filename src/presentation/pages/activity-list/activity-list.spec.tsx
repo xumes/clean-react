@@ -2,7 +2,6 @@ import React from 'react'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import ActivityList from '@/presentation/pages/activity-list/activity-list'
 import { LoadActivityList } from '@/domain/usecases/load-activity-list'
-import { ActivityModel } from '@/domain/models'
 import { mockActivityListModel } from '@/domain/test'
 import { UnexpectedError } from '@/domain/errors'
 
@@ -10,7 +9,7 @@ class LoadActivityListSpy implements LoadActivityList {
   callsCount = 0
   activities = mockActivityListModel()
 
-  async loadAll (): Promise<ActivityModel[]> {
+  async loadAll (): Promise<LoadActivityList.Model[]> {
     this.callsCount++
 
     return this.activities

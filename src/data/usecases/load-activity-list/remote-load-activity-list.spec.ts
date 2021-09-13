@@ -3,16 +3,15 @@ import { HttpGetClientSpy } from '@/data/test'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { UnexpectedError } from '@/domain/errors'
 import faker from 'faker/locale/en_CA'
-import { ActivityModel } from '@/domain/models'
 import { mockActivityListModel } from '@/domain/test/mock-activity-list'
 
 type SutTypes = {
   sut: RemoteLoadActivityList
-  httpGetClientSpy: HttpGetClientSpy<ActivityModel[]>
+  httpGetClientSpy: HttpGetClientSpy<RemoteLoadActivityList.Model[]>
 }
 
 const makeSut = (url = faker.internet.url()): SutTypes => {
-  const httpGetClientSpy = new HttpGetClientSpy<ActivityModel[]>()
+  const httpGetClientSpy = new HttpGetClientSpy<RemoteLoadActivityList.Model[]>()
   const sut = new RemoteLoadActivityList(url, httpGetClientSpy)
 
   return {
@@ -60,7 +59,7 @@ describe('RemoteLoadActivityList', () => {
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
 
-  test('should return a list of ActivityModel if HttpGetClient returns 200', async () => {
+  test('should return a list of LoadActivityList.Model if HttpGetClient returns 200', async () => {
     const { sut, httpGetClientSpy } = makeSut()
     const httpResult = mockActivityListModel()
 

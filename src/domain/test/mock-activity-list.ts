@@ -1,7 +1,7 @@
-import { ActivityModel } from '../models'
 import faker from 'faker'
+import { LoadActivityList } from '../usecases/load-activity-list'
 
-export const mockActivityModel = (): ActivityModel => ({
+export const mockActivityModel = (): LoadActivityList.Model => ({
   id: faker.datatype.number(),
   userId: faker.datatype.number(),
   createdDateTime: faker.datatype.datetime(),
@@ -22,7 +22,7 @@ export const mockActivityModel = (): ActivityModel => ({
   formattedDateTime: faker.datatype.string()
 })
 
-export const mockActivityListModel = (): ActivityModel[] => ([
+export const mockActivityListModel = (): LoadActivityList.Model[] => ([
   mockActivityModel(),
   mockActivityModel(),
   mockActivityModel()

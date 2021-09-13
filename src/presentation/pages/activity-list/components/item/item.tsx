@@ -2,10 +2,10 @@ import React from 'react'
 import Icon, { IconName } from '@/presentation/components/icon/icon'
 
 import Styles from './item-styles.scss'
-import { ActivityModel } from '@/domain/models'
+import { LoadActivityList } from '@/domain/usecases/load-activity-list'
 
 type Props = {
-  activity: ActivityModel
+  activity: LoadActivityList.Model
 }
 
 const getIcon = (category: string): IconName => {
@@ -21,7 +21,7 @@ const getIcon = (category: string): IconName => {
   }
 }
 
-const getDurationLabel = (activity: ActivityModel): string => {
+const getDurationLabel = (activity: LoadActivityList.Model): string => {
   if (activity.category !== 'proposal-viewed') {
     return ''
   }
