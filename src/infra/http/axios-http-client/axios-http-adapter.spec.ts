@@ -84,5 +84,16 @@ describe('AxiosHttpAdapter', () => {
       const promise = sut.get(request)
       expect(promise).toEqual(mockedAxios.get.mock.results[0].value)
     })
+
+    test('should return correct response on axios.get server error', async () => {
+      const request = mockGetRequest()
+      const { sut, mockedAxios } = makeSut()
+      mockedAxios.get.mockRejectedValueOnce({
+        response: mockedAxiosResult()
+      })
+
+      const promise = sut.get(request)
+      expect(promise).toEqual(mockedAxios.get.mock.results[0].value)
+    })
   })
 })

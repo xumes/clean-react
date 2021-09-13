@@ -14,14 +14,7 @@ export class AxiosHttpAdapter implements HttpPostClient<any>, HttpGetClient {
     try {
       axiosResponse = await axios.post(params.url, params.body, request)
     } catch (error) {
-      if (error.response) {
-        axiosResponse = error.response
-      } else {
-        return {
-          statusCode: 500,
-          body: { title: 'Unexpected server error', message: error }
-        }
-      }
+      axiosResponse = error.response
     }
     return this.adapt(axiosResponse)
   }
