@@ -34,6 +34,19 @@ describe('ActivityItem component', () => {
 
   test('Should render with correct values', () => {
     const activity = mockActivityModel()
+    activity.category = 'proposal-signed'
+    render(<ActivityItem activity={activity} />)
+
+    expect(screen.getByTestId('icon')).toHaveProperty('src', IconName.proposalSigned)
+    expect(screen.getByTestId('description')).toHaveTextContent(activity.description)
+    expect(screen.getByTestId('duration')).toHaveTextContent('')
+    expect(screen.getByTestId('time-ago')).toHaveTextContent(activity.formattedDateTime)
+    expect(screen.getByTestId('date-time')).toHaveTextContent(activity.createdDateTime.toUTCString())
+    expect(screen.getByTestId('action-button')).toHaveTextContent('Action')
+  })
+
+  test('Should render with correct values', () => {
+    const activity = mockActivityModel()
     activity.category = 'proposal-approval-requested'
     render(<ActivityItem activity={activity} />)
 
