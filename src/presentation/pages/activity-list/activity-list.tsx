@@ -13,14 +13,15 @@ type Props = {
 const ActivityList: React.FC<Props> = ({ loadActivityList }: Props) => {
   const [state, setState] = useState({
     activities: [] as ActivityModel[],
-    error: ''
+    error: '',
+    reload: false
   })
 
   useEffect(() => {
     loadActivityList.loadAll()
       .then(activities => setState({ ...state, activities }))
       .catch(error => setState({ ...state, error: error.message }))
-  }, [])
+  }, [state.reload])
 
   return (
         <div className={Styles.activityListWrap}>

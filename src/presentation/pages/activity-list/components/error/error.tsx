@@ -3,12 +3,16 @@ import Styles from './error-styles.scss'
 import { ActivityContext } from '@/presentation/pages/activity-list/components'
 
 const Error: React.FC = () => {
-  const { state } = useContext(ActivityContext)
+  const { state, setState } = useContext(ActivityContext)
+
+  const reload = (): void => {
+    setState({ activities: [], error: '', reload: !state.reload })
+  }
 
   return (
     <div className={Styles.errorWrap}>
         <span data-testid="error">{state.error}</span>
-        <button>Reload</button>
+        <button data-testid="reload" onClick={reload}>Reload</button>
     </div>
   )
 }
