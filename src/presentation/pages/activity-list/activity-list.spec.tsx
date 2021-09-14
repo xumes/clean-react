@@ -1,9 +1,12 @@
 import React from 'react'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
-import ActivityList from '@/presentation/pages/activity-list/activity-list'
+import { createMemoryHistory } from 'history'
 import { LoadActivityList } from '@/domain/usecases/load-activity-list'
 import { mockActivityListModel } from '@/domain/test'
 import { UnexpectedError } from '@/domain/errors'
+import { Router } from 'react-router-dom'
+import { ApiContext } from '@/presentation/contexts'
+import ActivityList from '@/presentation/pages/activity-list/activity-list'
 
 class LoadActivityListSpy implements LoadActivityList {
   callsCount = 0
@@ -21,7 +24,14 @@ type SutTypes = {
 }
 
 const makeSut = (loadActivityListSpy = new LoadActivityListSpy()): SutTypes => {
-  render(<ActivityList loadActivityList={loadActivityListSpy} />)
+  const history = createMemoryHistory()
+  render(
+    <ApiContext.Provider value={{ setCurrentAccount: jest.fn() }} >
+      <Router history={history} >
+        <ActivityList loadActivityList={loadActivityListSpy} />
+      </Router>
+    </ApiContext.Provider>
+  )
 
   return {
     loadActivityListSpy
