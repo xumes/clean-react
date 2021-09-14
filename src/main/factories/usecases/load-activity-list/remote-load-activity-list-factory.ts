@@ -4,5 +4,5 @@ import { LoadActivityList } from '@/domain/usecases/load-activity-list'
 import { RemoteLoadActivityList } from '@/data/usecases/load-activity-list/remote-load-activity-list'
 
 export const makeRemoteLoadActivityList = (): LoadActivityList => {
-  return new RemoteLoadActivityList(makeApiUrl('/activities'), makeAuthorizeHttpGetClientDecorator())
+  return new RemoteLoadActivityList(makeApiUrl('/activity'), makeAuthorizeHttpGetClientDecorator())
 }
