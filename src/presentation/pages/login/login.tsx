@@ -62,7 +62,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
         password: state.password,
         client_id: state.clientId,
         client_secret: state.clientSecret,
-        grant_type: 'password'
+        grant_type: state.grantType
       })
 
       setCurrentAccount(account)
