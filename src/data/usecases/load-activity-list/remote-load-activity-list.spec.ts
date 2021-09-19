@@ -1,7 +1,7 @@
 import { RemoteLoadActivityList } from './remote-load-activity-list'
 import { HttpGetClientSpy } from '@/data/test'
 import { HttpStatusCode } from '@/data/protocols/http'
-import { UnexpectedError } from '@/domain/errors'
+import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
 import faker from 'faker/locale/en_CA'
 import { mockActivityListModel } from '@/domain/test/mock-activity-list'
 
@@ -37,6 +37,16 @@ describe('RemoteLoadActivityList', () => {
 
     const promise = sut.loadAll()
     await expect(promise).rejects.toThrow(new UnexpectedError())
+  })
+
+  test('should throw UnexpectedError if HttpGetClient returns 403', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.forbidden
+    }
+
+    const promise = sut.loadAll()
+    await expect(promise).rejects.toThrow(new AccessDeniedError())
   })
 
   test('should throw UnexpectedError if HttpGetClient returns 404', async () => {
