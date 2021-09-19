@@ -1,7 +1,17 @@
 import faker from 'faker'
-import * as FormHelper from '../support/form-helpers'
-import * as Helper from '../support/helpers'
-import * as Http from '../support/login-mocks'
+import * as FormHelper from '../utils/form-helpers'
+import * as Helper from '../utils/helpers'
+import * as Http from '../utils/http-mocks'
+
+const path = '/api/authtoken'
+const mockUnauthorizedError = (errorMessage: string): void => Http.mockUnauthorizedError(path, errorMessage)
+const mockServerError = (errorMessage: string): void => Http.mockServerError(path, 'POST', errorMessage)
+const mockSuccess = (): void => Http.mockOk(path, 'POST', {
+  access_token: 'any_token',
+  refresh_token: 'any_refresh_token',
+  token_type: 'any_token_type',
+  expires_in: 60
+})
 
 describe('Login', () => {
   beforeEach(() => {
@@ -43,7 +53,7 @@ describe('Login', () => {
 
   it('Should display error message on 401', () => {
     const errorMessage = faker.random.words()
-    Http.mockUnauthorizedError(errorMessage)
+    mockUnauthorizedError(errorMessage)
 
     cy.getByTestId('email').type(faker.internet.email())
 
@@ -60,7 +70,7 @@ describe('Login', () => {
 
   it('Should display error message on error', () => {
     const errorMessage = faker.random.words()
-    Http.mockServerError(errorMessage)
+    mockServerError(errorMessage)
 
     cy.getByTestId('email').type(faker.internet.email())
 
@@ -74,7 +84,7 @@ describe('Login', () => {
   })
 
   it('Should save access_token if valid credentials are provided', () => {
-    Http.mockOk()
+    mockSuccess()
 
     cy.getByTestId('email').type(faker.internet.email())
 
@@ -90,7 +100,7 @@ describe('Login', () => {
   })
 
   it('Should prevents multiple submits', () => {
-    Http.mockOk()
+    mockSuccess()
     cy.getByTestId('email').type(faker.internet.email())
 
     cy.getByTestId('password').type(faker.random.alphaNumeric(8))
@@ -103,7 +113,7 @@ describe('Login', () => {
   })
 
   it('Should submit form on Enter', () => {
-    Http.mockOk()
+    mockSuccess()
 
     cy.getByTestId('email').type(faker.internet.email())
 
@@ -115,7 +125,7 @@ describe('Login', () => {
   })
 
   it('Should not call submit if form is invalid', () => {
-    Http.mockOk()
+    mockSuccess()
 
     cy.getByTestId('email').type(faker.internet.email()).type('{enter}')
 

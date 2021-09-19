@@ -1,15 +1,19 @@
-import faker from 'faker'
-import * as Helper from '../support/helpers'
-import * as Http from '../support/activity-list-mocks'
+import * as Helper from '../utils/helpers'
+import * as Http from '../utils/http-mocks'
+
+const mockUnexpectedError = (errorMessage: string): void => Http.mockServerError('/activity', 'GET', errorMessage)
+const mockAccessDeniedError = (): void => Http.mockForbiddenError(/activity/, 'GET')
 
 describe('ActivityList', () => {
   beforeEach(() => {
-    Helper.setLocalStorageItem('account', { access_token: faker.datatype.uuid() })
+    cy.fixture('account').then(account => {
+      Helper.setLocalStorageItem('account', account)
+    })
   })
 
   it('Should display error on UnexpectedError', () => {
     const errorMessage = 'Something wrong happened. Please, try again later.'
-    Http.mockUnexpectedError(errorMessage)
+    mockUnexpectedError(errorMessage)
 
     cy.visit('/')
 
@@ -18,7 +22,7 @@ describe('ActivityList', () => {
 
   it('Should persist on error message in case of load continue failing', () => {
     const errorMessage = 'Something wrong happened. Please, try again later.'
-    Http.mockUnexpectedError(errorMessage)
+    mockUnexpectedError(errorMessage)
 
     cy.visit('/')
 
@@ -30,8 +34,7 @@ describe('ActivityList', () => {
   })
 
   it('Should force logout user on AccessDeniedError', () => {
-    const errorMessage = 'Something wrong happened. Please, try again later.'
-    Http.mockAccessDeniedError(errorMessage)
+    mockAccessDeniedError()
 
     cy.visit('/')
 
@@ -40,7 +43,7 @@ describe('ActivityList', () => {
 
   it('Should logout on logout link click', () => {
     const errorMessage = 'Something wrong happened. Please, try again later.'
-    Http.mockUnexpectedError(errorMessage)
+    mockUnexpectedError(errorMessage)
 
     cy.visit('/')
     cy.getByTestId('logout').click()

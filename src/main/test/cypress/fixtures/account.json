@@ -1,0 +1,6 @@
+{
+    "access_token": "any_token",
+    "refresh_token": "any_refresh_token",
+    "token_type": "any_token_type",
+    "expires_in": 60
+}
