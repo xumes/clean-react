@@ -16,6 +16,19 @@ describe('ActivityList', () => {
     cy.getByTestId('error').should('contain.text', errorMessage)
   })
 
+  it('Should persist on error message in case of load continue failing', () => {
+    const errorMessage = 'Something wrong happened. Please, try again later.'
+    Http.mockUnexpectedError(errorMessage)
+
+    cy.visit('/')
+
+    cy.getByTestId('error').should('contain.text', errorMessage)
+
+    cy.getByTestId('reload').click()
+
+    cy.getByTestId('error').should('contain.text', errorMessage)
+  })
+
   it('Should force logout user on AccessDeniedError', () => {
     const errorMessage = 'Something wrong happened. Please, try again later.'
     Http.mockAccessDeniedError(errorMessage)
