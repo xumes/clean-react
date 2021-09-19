@@ -1,5 +1,6 @@
 import faker from 'faker'
 import * as FormHelper from '../support/form-helpers'
+import * as Helper from '../support/helpers'
 import * as Http from '../support/login-mocks'
 
 describe('Login', () => {
@@ -42,7 +43,7 @@ describe('Login', () => {
 
   it('Should display error message on 401', () => {
     const errorMessage = faker.random.words()
-    Http.mockInvalidCredentialsError(errorMessage)
+    Http.mockUnauthorizedError(errorMessage)
 
     cy.getByTestId('email').type(faker.internet.email())
 
@@ -54,12 +55,12 @@ describe('Login', () => {
     cy.getByTestId('main-error').should('exist')
       .getByTestId('main-error').should('contains.text', errorMessage)
 
-    FormHelper.testUrl('/login')
+    Helper.testUrl('/login')
   })
 
   it('Should display error message on error', () => {
     const errorMessage = faker.random.words()
-    Http.mockUnexpectedError(errorMessage)
+    Http.mockServerError(errorMessage)
 
     cy.getByTestId('email').type(faker.internet.email())
 
@@ -69,7 +70,7 @@ describe('Login', () => {
 
     FormHelper.testMainError(errorMessage)
 
-    FormHelper.testUrl('/login')
+    Helper.testUrl('/login')
   })
 
   it('Should save access_token if valid credentials are provided', () => {
@@ -83,23 +84,9 @@ describe('Login', () => {
 
     cy.getByTestId('spinner').should('not.exist')
 
-    FormHelper.testUrl('/')
+    Helper.testUrl('/')
 
-    FormHelper.testLocalStorage('account')
-  })
-
-  it.skip('Should display UnexpectedError if invalid data is returned', () => {
-    Http.mockInvalidParam()
-
-    cy.getByTestId('email').type(faker.internet.email())
-
-    cy.getByTestId('password').type(faker.random.alphaNumeric(8))
-
-    cy.getByTestId('submit').click()
-
-    FormHelper.testMainError('Something wrong happened. Please, try again later.')
-
-    FormHelper.testUrl('/login')
+    Helper.testLocalStorage('account')
   })
 
   it('Should prevents multiple submits', () => {
@@ -112,7 +99,7 @@ describe('Login', () => {
 
     cy.wait('@request')
 
-    FormHelper.testHttpCallsCount(1)
+    Helper.testHttpCallsCount(1)
   })
 
   it('Should submit form on Enter', () => {
@@ -124,7 +111,7 @@ describe('Login', () => {
 
     cy.wait('@request')
 
-    FormHelper.testHttpCallsCount(1)
+    Helper.testHttpCallsCount(1)
   })
 
   it('Should not call submit if form is invalid', () => {
@@ -132,6 +119,6 @@ describe('Login', () => {
 
     cy.getByTestId('email').type(faker.internet.email()).type('{enter}')
 
-    FormHelper.testHttpCallsCount(0)
+    Helper.testHttpCallsCount(0)
   })
 })
