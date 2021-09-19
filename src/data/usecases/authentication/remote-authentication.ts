@@ -29,5 +29,10 @@ export class RemoteAuthentication implements Authentication {
 }
 
 export namespace RemoteAuthentication {
-  export type Model = Authentication.Model
+  export type Model = {
+    access_token: string
+    refresh_token: string
+    tokenType: string
+    expiresIn: number
+  }
 }

@@ -1,6 +1,6 @@
 export type AccountModel = {
-  accessToken: string
-  refreshToken: string
+  access_token: string
+  refresh_token: string
   tokenType: string
   expiresIn: number
 }

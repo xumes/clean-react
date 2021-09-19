@@ -4,7 +4,7 @@ import { ApiContext } from '@/presentation/contexts'
 
 const PrivateRoute: React.FC<RouteProps> = (props: RouteProps) => {
   const { getCurrentAccount } = useContext(ApiContext)
-  return getCurrentAccount()?.accessToken
+  return getCurrentAccount()?.access_token
     ? <Route { ...props } />
     : <Route { ...props } component={ () => <Redirect to='/login' /> } />
 }

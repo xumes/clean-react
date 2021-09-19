@@ -55,7 +55,7 @@ describe('AuthorizeHttpGetClientDecorator', () => {
 
     expect(httpGetClientSpy.url).toBe(httpRequest.url)
     expect(httpGetClientSpy.headers).toEqual({
-      Authorization: `Bearer ${getStorageSpy.value.accessToken}`
+      Authorization: `${getStorageSpy.value.token_type} ${getStorageSpy.value.access_token}`
     })
   })
 
@@ -75,7 +75,7 @@ describe('AuthorizeHttpGetClientDecorator', () => {
     expect(httpGetClientSpy.url).toBe(httpRequest.url)
     expect(httpGetClientSpy.headers).toEqual({
       field,
-      Authorization: `Bearer ${getStorageSpy.value.accessToken}`
+      Authorization: `${getStorageSpy.value.token_type} ${getStorageSpy.value.access_token}`
     })
   })
 

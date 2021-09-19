@@ -72,7 +72,7 @@ describe('Login', () => {
     FormHelper.testUrl('/login')
   })
 
-  it('Should save accessToken if valid credentials are provided', () => {
+  it('Should save access_token if valid credentials are provided', () => {
     Http.mockOk()
 
     cy.getByTestId('email').type(faker.internet.email())

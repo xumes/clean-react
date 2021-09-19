@@ -10,8 +10,8 @@ export const mockAuthentication = (body: any): Authentication.Params => ({
 })
 
 export const mockAccountModel = (): Authentication.Model => ({
-  accessToken: faker.datatype.uuid(),
-  refreshToken: faker.datatype.uuid(),
+  access_token: faker.datatype.uuid(),
+  refresh_token: faker.datatype.uuid(),
   tokenType: faker.lorem.word(1),
   expiresIn: faker.datatype.number()
 })
