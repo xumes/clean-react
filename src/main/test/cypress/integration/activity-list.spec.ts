@@ -55,21 +55,27 @@ describe('ActivityList', () => {
       assert.equal(li.find('[data-testid="description"]').text(), 'any_descriptionfor 12 seconds')
       assert.equal(li.find('[data-testid="time-ago"]').text(), 'any_formatted_date_time')
       assert.equal(li.find('[data-testid="date-time"]').text(), new Date('2021-09-03 09:26:08').toUTCString())
-      assert.equal(li.find('[data-testid="icon"]').attr('src'), 'https://e7.pngegg.com/pngimages/975/667/png-clipart-gray-eye-on-black-background-logo-circle-brand-angle-eye-icon-viewed-accomms-people-black.png')
+      cy.fixture('icons').then(icon => {
+        assert.equal(li.find('[data-testid="icon"]').attr('src'), icon.proposalViewed)
+      })
     })
 
     cy.get('li:nth-child(2').then(li => {
       assert.equal(li.find('[data-testid="description"]').text(), 'any__other_description')
       assert.equal(li.find('[data-testid="time-ago"]').text(), 'another_formatted_date_time')
       assert.equal(li.find('[data-testid="date-time"]').text(), new Date('2021-09-04 09:26:08').toUTCString())
-      assert.equal(li.find('[data-testid="icon"]').attr('src'), 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpHNF8oNPkQFVZs2WZaK-bk-18FS21wNvDIvfAiTjDNE7hyjNNoSXtv-ksC_MulOkHlIo&usqp=CAU')
+      cy.fixture('icons').then(icon => {
+        assert.equal(li.find('[data-testid="icon"]').attr('src'), icon.proposalCreated)
+      })
     })
 
     cy.get('li:nth-child(3').then(li => {
       assert.equal(li.find('[data-testid="description"]').text(), 'other_description')
       assert.equal(li.find('[data-testid="time-ago"]').text(), 'other_formatted_date_time')
       assert.equal(li.find('[data-testid="icon"]').attr('src'), 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDBBS8_R9oTuldfUWrAzn3UB2S5sAryYDZ9b5m-DADiiWOX2MccSM62NfZa3Jk_Tq4BQ&usqp=CAU')
-      assert.equal(li.find('[data-testid="date-time"]').text(), new Date('2021-09-05 09:26:08').toUTCString())
+      cy.fixture('icons').then(icon => {
+        assert.equal(li.find('[data-testid="icon"]').attr('src'), icon.proposalSigned)
+      })
     })
   })
 })
