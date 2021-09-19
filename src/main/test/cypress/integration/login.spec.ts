@@ -88,7 +88,7 @@ describe('Login', () => {
     FormHelper.testLocalStorage('account')
   })
 
-  it('Should display UnexpectedError if invalid data is returned', () => {
+  it.skip('Should display UnexpectedError if invalid data is returned', () => {
     Http.mockInvalidParam()
 
     cy.getByTestId('email').type(faker.internet.email())
