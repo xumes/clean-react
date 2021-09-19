@@ -25,7 +25,7 @@ export class AxiosHttpAdapter implements HttpPostClient<any>, HttpGetClient {
     try {
       axiosResponse = await axios.get(params.url, { headers: params.headers })
     } catch (error) {
-      axiosResponse = error?.response
+      axiosResponse = error?.response || 'unexpected error'
     }
 
     return this.adapt(axiosResponse)

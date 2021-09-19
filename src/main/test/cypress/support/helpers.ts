@@ -11,3 +11,9 @@ export const testUrl = (uri: string): void => {
 export const testLocalStorage = (key: string): void => {
   cy.window().then(window => assert.isOk(window.localStorage.getItem(key)))
 }
+
+export const setLocalStorageItem = (key: string, value: object): void => {
+  console.log('key', key)
+  console.log('value', value)
+  localStorage.setItem(key, JSON.stringify(value))
+}
