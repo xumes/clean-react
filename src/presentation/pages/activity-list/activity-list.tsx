@@ -1,20 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
+import React, { useEffect, useState } from 'react'
 import Styles from './activity-list-styles.scss'
 import { LoadActivityList } from '@/domain/usecases/load-activity-list'
-import { AccessDeniedError } from '@/domain/errors'
 import Header from '@/presentation/components/header/header'
 import Footer from '@/presentation/components/footer/footer'
 import { ActivittListItem, ActivityContext, ActivityError } from '@/presentation/pages/activity-list/components'
-import { ApiContext } from '@/presentation/contexts'
+import { useErrorHandler } from '@/presentation/hooks'
 
 type Props = {
   loadActivityList: LoadActivityList
 }
 
 const ActivityList: React.FC<Props> = ({ loadActivityList }: Props) => {
-  const history = useHistory()
-  const { setCurrentAccount } = useContext(ApiContext)
+  const handleError = useErrorHandler((error: Error) => {
+    setState({ ...state, error: error.message })
+  })
   const [state, setState] = useState({
     activities: [] as LoadActivityList.Model[],
     error: '',
@@ -25,12 +24,7 @@ const ActivityList: React.FC<Props> = ({ loadActivityList }: Props) => {
     loadActivityList.loadAll()
       .then(activities => setState({ ...state, activities }))
       .catch(error => {
-        if (error instanceof AccessDeniedError) {
-          setCurrentAccount(undefined)
-          history.replace('/login')
-        } else {
-          setState({ ...state, error: error.message })
-        }
+        handleError(error)
       })
   }, [state.reload])
 
