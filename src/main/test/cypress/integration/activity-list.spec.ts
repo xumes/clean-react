@@ -16,11 +16,21 @@ describe('ActivityList', () => {
     cy.getByTestId('error').should('contain.text', errorMessage)
   })
 
-  it('Should logout on AccessDeniedError', () => {
+  it('Should force logout user on AccessDeniedError', () => {
     const errorMessage = 'Something wrong happened. Please, try again later.'
     Http.mockAccessDeniedError(errorMessage)
 
     cy.visit('/')
+
+    Helper.testUrl('/login')
+  })
+
+  it('Should logout on logout link click', () => {
+    const errorMessage = 'Something wrong happened. Please, try again later.'
+    Http.mockUnexpectedError(errorMessage)
+
+    cy.visit('/')
+    cy.getByTestId('logout').click()
 
     Helper.testUrl('/login')
   })
