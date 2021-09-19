@@ -26,6 +26,19 @@ describe('ActivityList', () => {
     cy.getByTestId('error').should('contain.text', errorMessage)
   })
 
+  it('Should reload on button click', () => {
+    const errorMessage = 'Something wrong happened. Please, try again later.'
+    mockUnexpectedError(errorMessage)
+
+    cy.visit('/')
+
+    cy.getByTestId('error').should('contain.text', errorMessage)
+
+    mockSuccess()
+    cy.getByTestId('reload').click()
+    cy.get('li:not(:empty)').should('have.length', 3)
+  })
+
   it('Should force logout user on AccessDeniedError', () => {
     mockAccessDeniedError()
 
