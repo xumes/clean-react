@@ -4,7 +4,7 @@ import { LoadActivityList } from '../usecases/load-activity-list'
 export const mockActivityModel = (): LoadActivityList.Model => ({
   id: faker.datatype.number(),
   userId: faker.datatype.number(),
-  createdDateTime: faker.datatype.datetime(),
+  createdDateTime: new Date('2021-09-03 09:26:08'),
   activityEventId: faker.datatype.number(),
   personId: faker.datatype.number(),
   proposalId: faker.datatype.number(),

@@ -42,7 +42,7 @@ const ActivityItem: React.FC<Props> = ({ activity }: Props) => {
         <footer>
             <time>
                 <span data-testid="time-ago" className={Styles.timeAgo}>{activity.formattedDateTime}</span>
-                <span data-testid="date-time" className={Styles.dateTime}>{activity.createdDateTime.toUTCString()}</span>
+                <span data-testid="date-time" className={Styles.dateTime}>{new Date(activity.createdDateTime).toUTCString()}</span>
             </time>
             <p data-testid="action-button">Action</p>
         </footer>

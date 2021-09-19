@@ -24,7 +24,7 @@ export const mockServerError = (uri: string, method: any, errorMessage: string):
   ).as('request')
 }
 
-export const mockForbiddenError = (uri: RegExp, method: any): void => {
+export const mockForbiddenError = (uri: string, method: any): void => {
   cy.intercept(method, uri,
     {
       statusCode: 403,
